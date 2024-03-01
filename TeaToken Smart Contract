@@ -1,0 +1,20 @@
+from brownie import accounts, network, TeaToken
+
+def main():
+    # Подключаемся к сети Ethereum
+    network.connect("mainnet")
+
+    # Получаем аккаунт для развертывания контракта
+    deployer = accounts.load("your_wallet_name")
+
+    # Указываем начальное количество токенов для развертывания
+    initial_supply = 1000000
+
+    # Развертываем контракт TeaToken
+    token = TeaToken.deploy(initial_supply, {'from': deployer})
+
+    # Выводим адрес контракта для дальнейшего использования
+    print("TeaToken deployed at:", token.address)
+
+    # Опционально: проверяем баланс развернутого контракта
+    print("TeaToken balance of deployer:", token.balanceOf(deployer))
